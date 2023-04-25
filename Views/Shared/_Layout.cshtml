@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="OndraPavlovic" />
+    <title>@ViewData["Title"]</title>
+    <link rel="shortcut icon" href="~/images/logo.png" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/lightbox.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AspBlog.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/lightbox2/css/lightbox.min.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <h2><span>OndraPavlovic</span></h2>
+            <small>Web app developer</small>
+        </div>
+        <nav>
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Articles" asp-action="Index">Articles</a></li>
+                <li><a asp-controller="Home" asp-action="Skills">Skills</a></li>
+                <li><a asp-controller="Home" asp-action="References">References</a></li>
+                <li><a class="kontakt-tlacitko" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <article>
+        <div id="centrovac"
+            @if (Context.Request.RouteValues.Values.Any(p => p is "Home") && Context.Request.RouteValues.Values.Any(p => p is "Index"))
+            {
+                <text>class="domu-article"</text>    
+            }>
+            <header>
+                <h1><strong>@ViewData["Title"]</strong></h1>
+            </header>
+
+            @RenderBody()
+
+            <div class="cistic"></div>
+        </div>
+    </article>
+
+    <footer>
+        Created by &copy;Pavlovic @DateTime.Now.Year
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
